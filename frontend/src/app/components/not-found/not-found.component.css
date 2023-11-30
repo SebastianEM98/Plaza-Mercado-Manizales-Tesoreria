@@ -1,0 +1,106 @@
+@font-face {
+	font-family: "Montserrat";
+	src: url("../../../assets/fonts/Montserrat.ttf");
+}
+
+@font-face {
+	font-family: "Cabin";
+	src: url("../../../assets/fonts/Cabin.ttf");
+}
+
+html,
+body {
+    height: 100% !important;
+}
+
+#not-found-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+#not-found-header img {
+    margin-right: 15px;
+}
+
+#not-found-header .title{
+    font-size: 25px;
+}
+
+#not-found-header .icon-display {
+    transform: scale(1.4);
+}
+
+#not-found-header .mat-button {
+    font-size: 16px;
+    margin-top: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#not-found-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.background-logo {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.08;
+}
+
+.not-found-container {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.not-found {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.not-found-container h1 {
+    line-height: 186px;
+    height: 190px;
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 260px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #285D3F;
+    text-shadow: 0px 6px 12px #47474791;
+}
+
+.not-found-container h2 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #262626;
+    text-shadow: 0px 3px 8px rgba(94, 94, 94, 0.301); 
+}
+
+.not-found-container h3 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #262626;
+    text-shadow: 0px 3px 8px #47474762; 
+}
+
+#btn-go-back {
+    width: 30%;
+    margin-top: 20px;
+    height: 50px;
+    font-size: 16px;
+}

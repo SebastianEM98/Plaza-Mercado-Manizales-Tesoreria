@@ -1,0 +1,634 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <mat-toolbar>
+        <span>Ver Arrendatario</span>
+        <span class="navbar-spacer"></span>
+        <button mat-raised-button [routerLink]="['/central-abastos']">Regresar</button>
+    </mat-toolbar>
+
+    <div class="mat-elevation-z8 form-container">
+        <form [formGroup]="renterForm">
+            <mat-grid-list cols="3" rowHeight="90px">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <h2>INFORMACIÓN DEL ARRENDATARIO</h2>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput type="text" formControlName="name">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Cédula</mat-label>
+                        <input matInput type="text" formControlName="document">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                        <mat-label>Tipo de Persona</mat-label>
+                        <input matInput type="text" formControlName="type_person">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>NIT</mat-label>
+                        <input matInput type="text" formControlName="nit">
+                    </mat-form-field>
+                </mat-grid-tile>
+                
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Sucursales</mat-label>
+                        <input matInput type="text" formControlName="locations">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                        <mat-label>Interno/Externo</mat-label>
+                        <input matInput type="text" formControlName="internal_external">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Actividad</mat-label>
+                        <input matInput type="text" formControlName="activity">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="3" rowHeight="90px" class="grid-list-container">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <h2>INFORMACIÓN FINANCIERA</h2>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Saldo Inicial de Cartera</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="initial_wallet_balance" appMoneyFormat>
+                        <span matTextPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Saldo de Cartera Actual</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="actual_wallet_balance" appMoneyFormat>
+                        <span matTextPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Facturación Mensual Normal</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="normal_monthly_billing" appMoneyFormat>
+                        <span matTextPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Meses de Mora</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="overdue_months">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="3" rowHeight="90px" class="grid-list-container">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <h2>ACUERDOS DE PAGO Y DERECHOS</h2>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                        <mat-label>Estado</mat-label>
+                        <input matInput type="text" formControlName="status">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Acuerdo de Pago</mat-label>
+                        <input matInput type="text" formControlName="payment_agreement">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Fecha de Acuerdo</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="agreement_date">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Valor de Capital</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="capital_value" appMoneyFormat>
+                        <span matTextPrefix>$&nbsp;</span>
+                      </mat-form-field>
+                </mat-grid-tile>
+                
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Valor de Intereses</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="interest_value" appMoneyFormat>
+                        <span matTextPrefix>$&nbsp;</span>
+                      </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Valor Total</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="total_value" appMoneyFormat>
+                        <span matTextPrefix>$&nbsp;</span>
+                      </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Valor Acordado</mat-label>
+                        <mat-select formControlName="agreed_value">
+                            <mat-option disabled *ngIf="capitalValueNumber && interestValueNumber">-- seleccione una opción --</mat-option>
+                            <mat-option *ngIf="capitalValueNumber != 0 && capitalValueNumber" [value]="capitalValueNumber">{{ capitalValueNumber | number:'1.2-2' }} (Valor de Capital)</mat-option>
+                            <mat-option *ngIf="totalValueNumber != 0 && totalValueNumber" [value]="totalValueNumber">{{ totalValueNumber | number:'1.2-2' }} (Valor Total)</mat-option>
+                        </mat-select>
+                        <span matTextPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Valor de Cuota</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="quota_value" appMoneyFormat>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Número de Cuotas</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="quotas_number">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                        <mat-label>Periodicidad</mat-label>
+                        <mat-select formControlName="periodicity">
+                            <mat-option disabled>-- seleccione una opción --</mat-option>
+                            <mat-option *ngFor="let item of periodicityValues" [value]="item.value">
+                                {{item.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Fecha de Inicio</mat-label>
+                        <input matInput [matDatepicker]="picker2" formControlName="start_date">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Fecha de Factura Vencida Inicial</mat-label>
+                        <input matInput [matDatepicker]="picker3" formControlName="initial_overdue_bill_date">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Días Vencidos</mat-label>
+                        <input matInput type="text" placeholder="0" formControlName="expired_days">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Observaciones del Acuerdo</mat-label>
+                        <textarea matInput formControlName="agreement_observations"></textarea>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="3" rowHeight="90px" class="grid-list-container">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <h2>SEGUIMIENTO DE ENVÍO DE RECIBOS DE PAGO</h2>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Fecha de Vencimiento del Acuerdo</mat-label>
+                        <input matInput [matDatepicker]="picker4" formControlName="agreement_expiration_date">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                        <mat-datepicker #picker4></mat-datepicker>
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                        <mat-label>Vigencia del Acuerdo</mat-label>
+                        <input matInput type="text" formControlName="agreement_fulfillment" [ngClass]="setAgreementFulfillmentClassColor()">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="4" rowHeight="90px" id="grid-capital-payments">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <h2>ABONOS</h2>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>ENERO</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="january_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="january_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="january_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="january_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>FEBRERO</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="february_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="february_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="february_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="february_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>MARZO</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="march_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="march_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="march_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="march_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>ABRIL</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="april_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="april_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="april_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="april_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>MAYO</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="may_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="may_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="may_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="may_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>JUNIO</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="june_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="june_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="june_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="june_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>JULIO</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="july_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="july_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="july_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="july_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>AGOSTO</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="august_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="august_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="august_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="august_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>SEPTIEMBRE</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="september_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="september_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="september_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="september_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>OCTUBRE</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="october_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="october_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="october_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="october_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>NOVIEMBRE</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="november_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="november_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="november_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="november_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="5">
+                    <div class="mat-grid-tile-content-capital-payments">
+                        <h3>DICIEMBRE</h3>
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Factura</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="december_bill" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Detalle de Pago</mat-label>
+                            <input matInput type="text" formControlName="december_payment_detail">
+                        </mat-form-field>
+
+                        <mat-form-field class="element-width" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Abono</mat-label>
+                            <input matInput type="text"  placeholder="0" formControlName="december_capital_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+
+                        <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                            <mat-label>Tipo de Pago</mat-label>
+                            <input matInput type="text" formControlName="december_payment_type">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="2" rowHeight="80px">
+                <mat-grid-tile [colspan]="1" [rowspan]="2">
+                    <div class="mat-grid-tile-content-bad-debts">
+                        <h3>DEUDAS DE DIFÍCIL COBRO</h3>
+                        <mat-form-field class="element-width-bad-debts" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Deudas de Difícil Cobro</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="bad_debts" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="2">
+                    <div class="mat-grid-tile-content-total-balance">
+                        <h3>SALDO TOTAL (CARTERA + PROVISIÓN)</h3>
+                        <mat-form-field class="element-width-total-balance" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Saldo Total</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="total_balance" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="2" rowHeight="80px">
+                <mat-grid-tile [colspan]="1" [rowspan]="2">
+                    <div class="mat-grid-tile-remaining-agreement-payment">
+                        <h3>PAGO DEL ACUERDO RESTANTE</h3>
+                        <mat-form-field class="element-width-remaining-agreement-payment" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Pago del Acuerdo Restante</mat-label>
+                            <input matInput type="text" placeholder="0" formControlName="remaining_agreement_payment" appMoneyFormat>
+                            <span matTextPrefix>$&nbsp;</span>
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="2">
+                    <div class="mat-grid-tile-payment_agreement_status">
+                        <h3>ESTADO DEL ACUERDO DE PAGO</h3>
+                        <mat-form-field class="element-width-payment_agreement_status" floatLabel="always" [hideRequiredMarker]="true" appearance="fill">
+                            <mat-label>Estado del Acuerdo de Pago</mat-label>
+                            <input matInput type="text" formControlName="payment_agreement_status" [ngClass]="setPaymentAgreementStatusClassColor()">
+                        </mat-form-field>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="1" rowHeight="80px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button mat-raised-button class="go-back-button" [routerLink]="['/central-abastos']">REGRESAR</button>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form> 
+    </div>
+</div>
+

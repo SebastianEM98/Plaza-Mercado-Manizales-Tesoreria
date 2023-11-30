@@ -1,0 +1,82 @@
+h2 {
+    margin: 0px !important;
+}
+
+.form-container {
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.element-width {
+    width: 80%;
+}
+
+.element-width-bad-debts,
+.element-width-total-balance,
+.element-width-remaining-agreement-payment,
+.element-width-payment_agreement_status {
+    width: 55%;
+}
+
+
+input.number-input::-webkit-outer-spin-button,
+input.number-input::-webkit-inner-spin-button {
+    display: none;
+}
+
+.grid-list-container {
+    margin-bottom: 40px;
+}
+
+.mat-mdc-form-field {
+    --mdc-filled-text-field-disabled-label-text-color: rgba(0, 0, 0, 0.6) !important;
+    --mdc-filled-text-field-disabled-container-color: whitesmoke !important;
+    --mdc-filled-text-field-disabled-input-text-color: rgba(0, 0, 0, 0.87) !important; 
+    --mdc-filled-text-field-disabled-active-indicator-color: rgba(0, 0, 0, 0.42) !important;
+    --mat-select-disabled-trigger-text-color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.mat-mdc-form-field-type-mat-select,
+.mat-mdc-form-field-type-mat-input,
+.mdc-text-field__input {
+    cursor: not-allowed;
+}
+
+.mat-grid-tile-content-capital-payments,
+.mat-grid-tile-content-bad-debts,
+.mat-grid-tile-content-total-balance,
+.mat-grid-tile-remaining-agreement-payment,
+.mat-grid-tile-payment_agreement_status {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+}
+
+.mat-grid-tile-content-capital-payments h3,
+.mat-grid-tile-content-bad-debts h3,
+.mat-grid-tile-content-total-balance h3,
+.mat-grid-tile-remaining-agreement-payment h3,
+.mat-grid-tile-payment_agreement_status h3 {
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.mat-grid-tile-content-capital-payments mat-form-field {
+    margin-bottom: 14px;
+}
+
+.go-back-button {
+    width: 135px;
+    height: 42px;
+    font-size: 16px;
+    font-weight: 500;
+}

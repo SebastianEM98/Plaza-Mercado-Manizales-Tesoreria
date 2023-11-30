@@ -1,0 +1,214 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: auto;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.navbar-spacer {
+    flex: 1 1 auto;
+}
+
+/* SnackBar Messages */
+.mat-mdc-snack-bar-container.red-snackbar {
+    margin: 25px;
+    --mdc-snackbar-container-color: #f44336 !important;
+    --mdc-snackbar-supporting-text-color: #ffffff !important;
+}
+
+.red-snackbar button {
+    background-color: #f75448;
+    --mat-snack-bar-button-color: #ffffff !important;
+}
+
+.mat-mdc-snack-bar-container.green-snackbar {
+    margin: 25px;
+    --mdc-snackbar-container-color: #008947 !important;
+    --mdc-snackbar-supporting-text-color: #ffffff !important;
+}
+
+.green-snackbar button {
+    background-color: #218f5a;
+    --mat-snack-bar-button-color: #ffffff !important;
+}
+
+.mat-mdc-snack-bar-container.gray-snackbar {
+    margin: 25px;
+    --mdc-snackbar-container-color: #333333 !important;
+    --mdc-snackbar-supporting-text-color: #ffffff !important;
+}
+
+.gray-snackbar button {
+    background-color: #474747;
+    --mat-snack-bar-button-color: #ffffff !important;
+}
+
+
+/* Uppercase Input Fields */
+.uppercase-input {
+    text-transform: uppercase !important;
+}
+
+
+/* Input Password Visibility */
+.password-visibility-icon {
+    color: rgb(78, 78, 78);
+}
+
+
+/* Table Data Styles */
+table {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.actions-icon {
+    margin-left: 6px;
+    margin-right: 6px;
+    transition: all 300ms;
+}
+
+.actions-icon.view {
+    color: #3254ff;
+    cursor: pointer;
+}
+
+.actions-icon.view:hover {
+    transform: scale(1.4);
+}
+
+.actions-icon.view:active {
+    transform: scale(1.2);
+    color: #253ebb;
+}
+
+.actions-icon.edit {
+    color: #F6BE2C;
+    cursor: pointer;
+}
+
+.actions-icon.edit:hover {
+    transform: scale(1.4);
+}
+
+.actions-icon.edit:active {
+    transform: scale(1.2);
+    color: #b1861a;
+}
+
+
+.actions-icon.delete {
+    color: #f44336;
+    cursor: pointer;
+}
+
+.actions-icon.delete:hover {
+    transform: scale(1.4);
+}
+
+.actions-icon.delete:active {
+    transform: scale(1.2);
+    color: #9c2d25;
+}
+
+.disabled-icon:hover{
+    transform: scale(1) !important;
+    cursor: not-allowed !important;
+}
+.disabled-icon:active{
+    transform: scale(1) !important;
+    pointer-events: none;
+}
+mat-icon.disabled-icon {
+    filter:opacity(0.45);
+    cursor: not-allowed !important;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.container {
+    height: auto;
+    margin-left: 90px;
+    margin-right: 90px;
+    margin-top: 90px;
+    padding-bottom: 50px;
+}
+
+.container mat-toolbar {
+    background-color: #F0F0F0;
+    border-radius: 5px;
+}
+
+.container .table-filter {
+    margin-top: 30px;
+}
+
+.container mat-paginator {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+
+/* Value Input Text Color Styles */
+.renter-form-input-value-green {
+    color: #04d800 !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+}
+
+.renter-form-input-value-red {
+    color: #ff2222 !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+}
+
+.renter-form-input-value-orange {
+    color: #ff8022 !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+}
+
+
+/* Renter Column Value Styles */
+.renter-column-value-green {
+    width: 90% !important;
+    margin: 0px !important;
+    color: black !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    background-color: #04d8009c !important;
+    text-align: center;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.renter-column-value-red {
+    width: 90% !important;
+    margin: 0px !important;
+    color: black !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    background-color: #ff2222a6 !important;
+    text-align: center;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.renter-column-value-gray {
+    width: 90% !important;
+    margin: 0px !important;
+    color: black !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    background-color: #adadad9d !important;
+    text-align: center;
+    padding: 3px;
+    border-radius: 10px;
+}

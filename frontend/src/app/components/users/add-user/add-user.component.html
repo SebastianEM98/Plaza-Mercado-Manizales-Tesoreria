@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>Agregar Usuario</h2>
+
+<form [formGroup]="userForm" (ngSubmit)="addUser()">
+    <mat-dialog-content class="mat-typography">
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input class="uppercase-input" matInput type="text" formControlName="name">
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput type="email" formControlName="email">
+                    <mat-error *ngIf="userForm.get('email')?.hasError('email') && userForm.get('email')?.touched">
+                        Ingrese una dirección de correo electrónico válida
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="column">
+                <mat-form-field  class="element-width" [hideRequiredMarker]="true"  appearance="fill">
+                    <mat-label>Rol</mat-label>
+                    <mat-select formControlName="role">
+                        <mat-option disabled>-- seleccione una opción --</mat-option>
+                        <mat-option *ngFor="let role of roleValues" [value]="role.value">
+                            {{role.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="column">
+                <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" autocomplete="off">
+                    <mat-icon matSuffix (click)="hidePassword = !hidePassword" class="password-visibility-icon">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="userForm.get('password')?.hasError('minlength') && userForm.get('password')?.touched">
+                        La contraseña debe tener al menos <strong>6 caracteres</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+    
+            <div class="column">
+                <mat-form-field class="element-width" [hideRequiredMarker]="true" appearance="fill">
+                    <mat-label>Repetir Contraseña</mat-label>
+                    <input matInput [type]="hideRepeatPassword ? 'password' : 'text'" formControlName="repeatPassword" autocomplete="off">
+                    <mat-icon matSuffix (click)="hideRepeatPassword = !hideRepeatPassword" class="password-visibility-icon">{{hideRepeatPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button type="button" mat-button mat-dialog-close color="warn">Cancelar</button>
+        <button type="submit" mat-button cdkFocusInitial [disabled]="userForm.invalid">Agregar</button>
+    </mat-dialog-actions>
+</form>
+
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>

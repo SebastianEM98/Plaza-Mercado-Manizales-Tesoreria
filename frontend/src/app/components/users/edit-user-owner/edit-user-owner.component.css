@@ -1,0 +1,21 @@
+.element-width {
+    width: 100%;
+}
+
+.button {
+    width: 100px;
+}
+
+.accordion-container {
+    margin-top: 40px;
+}
+
+.accordion-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    justify-content: flex-end;
+}

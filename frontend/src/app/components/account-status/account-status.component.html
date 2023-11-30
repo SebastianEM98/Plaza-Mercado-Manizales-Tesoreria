@@ -1,0 +1,395 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <mat-toolbar>
+        <span>Estado de Cuenta</span>
+    </mat-toolbar>
+
+    <form class="select-renter-form">
+        <mat-form-field>
+            <mat-label>Arrendatario</mat-label>
+            <input matInput type="text" [matAutocomplete]="auto" [formControl]="searchRenterControl">
+            <button *ngIf="searchRenterControl.value" matSuffix mat-icon-button (click)="searchRenterControl.reset()">
+                <mat-icon>close</mat-icon>
+              </button>
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+                <mat-option *ngFor="let item of filteredRenters | async" [value]="item">
+                    <span>{{ item.name }}</span> |
+                    <small>NIT: {{ item.nit }}</small>
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+
+    <div class="mat-elevation-z8 data-container">
+        <mat-grid-list cols="1" rowHeight="80px" class="grid-list-container-header">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" class="grid-tile-background-primary-header">
+                <h1 class="data-container-title">CENTRO GALERIAS PLAZA DE MERCADO S.A.S</h1>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="10" rowHeight="40px" class="grid-list-container">
+            <mat-grid-tile [colspan]="6" [rowspan]="1" class="grid-tile-background-primary">
+                <div class="mat-grid-tile-content-label">
+                    <h2>CLIENTE</h2>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4" [rowspan]="1" class="grid-tile-border-primary">
+                <div class="mat-grid-tile-content-data">
+                    <h3 *ngIf="selectedRenter">{{ selectedRenter.name }}</h3>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="10" rowHeight="40px" class="grid-list-container">
+            <mat-grid-tile [colspan]="6" [rowspan]="1" class="grid-tile-background-primary">
+                <div class="mat-grid-tile-content-label">
+                    <h2>NIT</h2>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4" [rowspan]="1" class="grid-tile-border-primary">
+                <div class="mat-grid-tile-content-data">
+                    <h3 *ngIf="selectedRenter">{{ selectedRenter.nit }}</h3>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-grid-list cols="10" rowHeight="40px" class="grid-list-container mb-30">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" class="grid-tile-background-primary">
+                <div class="mat-grid-tile-content-label locations">
+                    <h2>Locales</h2>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="9" [rowspan]="1" class="grid-tile-border-primary">
+                <div class="mat-grid-tile-content-data locations">
+                    <h3 *ngIf="selectedRenter">{{ selectedRenter.locations }}</h3>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <div class="flex-container">
+            <div class="flex-container-left">
+                <div class="flex-items left">
+                    <h2>N&deg; de Días</h2>
+                    <h3 *ngIf="selectedRenter">{{ selectedRenter.payment_agreement_rights.expired_days }}</h3>
+                </div>
+    
+                <div class="flex-items left">
+                    <h2>N&deg; de Meses</h2>
+                    <h3 *ngIf="selectedRenter">{{ selectedRenter.financial_information.overdue_months }}</h3>
+                </div>
+            </div>
+
+            <div class="flex-container-center">
+                <div class="flex-items center">
+                    <h2>Saldo Actual de Cartera</h2>
+                    <div class="flex-data">
+                        <h1 *ngIf="selectedRenter">&dollar;</h1>
+                        <h1 *ngIf="selectedRenter">{{ selectedRenter.financial_information.actual_wallet_balance | number:'1.2-2' }}</h1>
+                    </div>
+                </div>
+
+                <div class="flex-items center">
+                    <h2>DEUDAS DE DIFÍCIL COBRO</h2>
+                    <div class="flex-data">
+                        <h1 *ngIf="selectedRenter">&dollar;</h1>
+                        <h1 *ngIf="selectedRenter">{{ selectedRenter.bad_debts | number:'1.2-2' }}</h1>
+                    </div>
+                </div>
+
+                <div class="flex-items center">
+                    <h2>Mensualidad</h2>
+                    <div class="flex-data">
+                        <h1 class="monthly-fee-h1" *ngIf="selectedRenter">&dollar;</h1>
+                        <h1 class="monthly-fee-h1" *ngIf="selectedRenter">{{ selectedRenter.financial_information.normal_monthly_billing | number:'1.2-2' }}</h1>
+                    </div>
+                </div>
+
+                <div class="flex-items center">
+                    <h2>Saldo Total (Cartera + Provisión)</h2>
+                    <div class="flex-data">
+                        <h1 *ngIf="selectedRenter">&dollar;</h1>
+                        <h1 *ngIf="selectedRenter">{{ selectedRenter.total_balance | number:'1.2-2' }}</h1>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex-container-right">
+                <div class="flex-items right">
+                    <h2>Estado</h2>
+                    <h3 id="status-data" *ngIf="selectedRenter">{{ selectedRenter.payment_agreement_rights.status }}</h3>
+                </div>
+    
+                <!-- <div class="flex-items right">
+                    <h2>&percnt; de Participación</h2>
+                    <h3 *ngIf="selectedRenter">N/A</h3>
+                </div> -->
+            </div>
+        </div>
+
+        <mat-grid-list cols="1" rowHeight="45px" class="grid-list-container-header mb-30">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" class="grid-tile-background-primary-payment-agreement">
+                <h2 class="data-container-title-payment-agreement">Acuerdo de Pago</h2>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <div class="flex-container-payment-agreement">
+            <div class="flex-container-payment-agreement-left">
+                <div class="flex-items payment-agreement left">
+                    <h2>Valor de Capital</h2>
+                    <p *ngIf="selectedRenter">&dollar; {{ selectedRenter.payment_agreement_rights.capital_value | number:'1.2-2' }}</p>
+                </div>
+
+                <div class="flex-items payment-agreement left">
+                    <h2>Valor de Intereses</h2>
+                    <p *ngIf="selectedRenter">&dollar; {{ selectedRenter.payment_agreement_rights.interest_value | number:'1.2-2' }}</p>
+                </div>
+
+                <div class="flex-items payment-agreement left">
+                    <h2>Mora Total</h2>
+                    <p *ngIf="selectedRenter">&dollar; {{ selectedRenter.payment_agreement_rights.total_value | number:'1.2-2' }}</p>
+                </div>
+
+                <div class="flex-items payment-agreement left">
+                    <h2>Valor Acordado</h2>
+                    <p *ngIf="selectedRenter">&dollar; {{ selectedRenter.payment_agreement_rights.agreed_value | number:'1.2-2' }}</p>
+                </div>
+
+                <div class="flex-items payment-agreement left">
+                    <h2>Fecha de Acuerdo</h2>
+                    <p *ngIf="selectedRenter">{{ selectedRenter.payment_agreement_rights.agreement_date | date: 'dd/MM/yyyy' }}</p>
+                </div>
+            </div>
+
+            <div class="flex-container-payment-agreement-center">
+                <div class="flex-items payment-agreement center">
+                    <h2>Fecha de Inicio</h2>
+                    <p *ngIf="selectedRenter">{{ selectedRenter.payment_agreement_rights.start_date | date: 'dd/MM/yyyy' }}</p>
+                </div>
+
+                <div class="flex-items payment-agreement center">
+                    <h2>N&deg; de Cuotas</h2>
+                    <p *ngIf="selectedRenter">{{ selectedRenter.payment_agreement_rights.quotas_number }}</p>
+                </div>
+
+                <div class="flex-items payment-agreement center">
+                    <h2>Valor de Cuota</h2>
+                    <p *ngIf="selectedRenter">&dollar; {{ selectedRenter.payment_agreement_rights.quota_value | number:'1.2-2' }}</p>
+                </div>
+            </div>
+
+            <div class="flex-container-payment-agreement-right">
+                <div class="flex-items payment-agreement right">
+                    <h2>Periodicidad (Días)</h2>
+                    <p *ngIf="selectedRenter">{{ selectedRenter.payment_agreement_rights.periodicity }}</p>
+                </div>
+            </div>
+        </div>
+
+        <mat-grid-list cols="1" rowHeight="18px" class="grid-list-container observations mb-30">
+            <mat-grid-tile [colspan]="1" [rowspan]="2" class="grid-tile-background-primary-header">
+                <h2>Observaciones</h2>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="3" class="">
+                <p *ngIf="selectedRenter">{{ selectedRenter.payment_agreement_rights.agreement_observations }}</p>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <div class="flex-container-capital-payments">
+            <div class="container-capital-payments bill-p">
+                <h2 class="text-h2 title">PAGOS DE FACTURAS</h2>
+                <div class="flex-container-months-values">
+                    <div class="flex-container-months">
+                        <h2 class="text-h2 month">MES</h2>
+    
+                        <h3 class="text-h3">ENERO</h3>
+                        <h3 class="text-h3">FEBRERO</h3>
+                        <h3 class="text-h3">MARZO</h3>
+                        <h3 class="text-h3">ABRIL</h3>
+                        <h3 class="text-h3">MAYO</h3>
+                        <h3 class="text-h3">JUNIO</h3>
+                        <h3 class="text-h3">JULIO</h3>
+                        <h3 class="text-h3">AGOSTO</h3>
+                        <h3 class="text-h3">SEPTIEMBRE</h3>
+                        <h3 class="text-h3">OCTUBRE</h3>
+                        <h3 class="text-h3">NOVIEMBRE</h3>
+                        <h3 class="text-h3">DICIEMBRE</h3>
+                        <h3 class="text-h3 total">TOTAL</h3>
+                    </div>
+
+                    <div class="flex-container-values">
+                        <h2 class="text-h2 value">VALOR</h2>
+                        
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.january.bill != 0">{{ selectedRenter.capital_payments.january.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.january.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.february.bill != 0">{{ selectedRenter.capital_payments.february.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.february.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.march.bill != 0">{{ selectedRenter.capital_payments.march.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.march.bill == 0">- - -</p>
+                        
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.april.bill != 0">{{ selectedRenter.capital_payments.april.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.april.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.may.bill != 0">{{ selectedRenter.capital_payments.may.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.may.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.june.bill != 0">{{ selectedRenter.capital_payments.june.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.june.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.july.bill != 0">{{ selectedRenter.capital_payments.july.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.july.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.august.bill != 0">{{ selectedRenter.capital_payments.august.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.august.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.september.bill != 0">{{ selectedRenter.capital_payments.september.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.september.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.october.bill != 0">{{ selectedRenter.capital_payments.october.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.october.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.november.bill != 0">{{ selectedRenter.capital_payments.november.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.november.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.december.bill != 0">{{ selectedRenter.capital_payments.december.bill | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.december.bill == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment total">
+                            <p class="text-p total">&dollar;</p>
+                            <p class="text-p total" *ngIf="selectedRenter">{{ totalBillPayment | number: '1.2-2' }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-container-bill-payment"></div>
+            </div>
+
+            <div class="container-capital-payments credit-p">
+                <h2 class="text-h2 title">PAGOS POR ABONO</h2>
+                <div class="flex-container-months-values">
+                    <div class="flex-container-months">
+                        <h2 class="text-h2 value">MES</h2>
+    
+                        <h3 class="text-h3">ENERO</h3>
+                        <h3 class="text-h3">FEBRERO</h3>
+                        <h3 class="text-h3">MARZO</h3>
+                        <h3 class="text-h3">ABRIL</h3>
+                        <h3 class="text-h3">MAYO</h3>
+                        <h3 class="text-h3">JUNIO</h3>
+                        <h3 class="text-h3">JULIO</h3>
+                        <h3 class="text-h3">AGOSTO</h3>
+                        <h3 class="text-h3">SEPTIEMBRE</h3>
+                        <h3 class="text-h3">OCTUBRE</h3>
+                        <h3 class="text-h3">NOVIEMBRE</h3>
+                        <h3 class="text-h3">DICIEMBRE</h3>
+                        <h3 class="text-h3 total">TOTAL</h3>
+                    </div>
+
+                    <div class="flex-container-values">
+                        <h2 class="text-h2 value">VALOR</h2>
+                        
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.january.capital_payment != 0">{{ selectedRenter.capital_payments.january.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.january.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.february.capital_payment != 0">{{ selectedRenter.capital_payments.february.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.february.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.march.capital_payment != 0">{{ selectedRenter.capital_payments.march.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.march.capital_payment == 0">- - -</p>
+                        
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.april.capital_payment != 0">{{ selectedRenter.capital_payments.april.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.april.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.may.capital_payment != 0">{{ selectedRenter.capital_payments.may.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.may.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.june.capital_payment != 0">{{ selectedRenter.capital_payments.june.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.june.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.july.capital_payment != 0">{{ selectedRenter.capital_payments.july.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.july.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.august.capital_payment != 0">{{ selectedRenter.capital_payments.august.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.august.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.september.capital_payment != 0">{{ selectedRenter.capital_payments.september.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.september.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.october.capital_payment != 0">{{ selectedRenter.capital_payments.october.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.october.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.november.capital_payment != 0">{{ selectedRenter.capital_payments.november.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.november.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment">
+                            <p class="text-p">&dollar;</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.december.capital_payment != 0">{{ selectedRenter.capital_payments.december.capital_payment | number: '1.2-2' }}</p>
+                            <p class="text-p" *ngIf="selectedRenter && selectedRenter.capital_payments.december.capital_payment == 0">- - -</p>
+                        </div>
+                        <div class="flex-data-capital-payment total">
+                            <p class="text-p total">&dollar;</p>
+                            <p class="text-p total" *ngIf="selectedRenter">{{ totalCapitalPayment | number: '1.2-2' }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-container-bill-payment"></div>
+            </div>
+            
+        </div>
+
+        <mat-grid-list cols="1" rowHeight="80px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1" class="grid-tile-background-primary-header">
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

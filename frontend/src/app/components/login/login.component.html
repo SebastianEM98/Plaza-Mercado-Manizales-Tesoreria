@@ -1,0 +1,27 @@
+<div class="login-container">
+    <mat-spinner class="login-spinner" diameter="50" *ngIf="loading"></mat-spinner>
+
+    <div class="login" *ngIf="!loading">
+        <img src="../../../assets/img/logo.png" width="80%">
+
+        <h1 class="login-h1">Iniciar Sesión</h1>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <mat-form-field class="login-element-width" [hideRequiredMarker]="true" appearance="fill">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput type="email" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field class="login-element-width" [hideRequiredMarker]="true" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                <mat-icon matSuffix (click)="hidePassword = !hidePassword" class="password-visibility-icon">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+
+            <br>
+
+            <button type="submit" mat-raised-button color="primary" class="login-element-width login-button"
+                [disabled]="loginForm.invalid">Ingresar</button>
+        </form>
+    </div>
+</div>
