@@ -15,8 +15,8 @@ const renter_routes = require('./src/routes/renter');
 const updateDailyRentersData = require('./src/controllers/renter-daily-updates');
 
 
-// Calls the function `updateDailyRentersData` every day at midnight (00:00) in the Colombian time zone
-cron.schedule('0 0 * * *', () => {
+// Calls the function `updateDailyRentersData` every day at 08:00 in the Colombian time zone
+cron.schedule('0 8 * * *', () => {
     updateDailyRentersData();
 }, {
     scheduled: true,
